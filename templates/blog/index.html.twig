@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les articles{% endblock %}
+
+{% block body %}
+<section class="arcticles">
+
+
+    {% for article in articles %}
+        <br><br>
+        <article>
+            <h2>{{ article.title }}</h2>
+            <div class="metadata">Ecrit le {{ article.createdAt | date ('d/m/Y') }} à {{ article.createdAt | date ('H:i') }} dans la catégorie {{ article.category.title }}</div>
+            <div class="content">
+                <img src={{ article.image }} alt="">
+                {{ article.content | raw }}
+                <a href="{{ path('blog_show', {'id': article.id }) }}" class="btn btn-primary">Lire la suite</a>
+                <a href="{{ path('blog_edit', {'id': article.id }) }}" class="btn btn-primary">Modifier l'article</a>
+
+            </div>
+        </article>
+        <br><br>
+    {% endfor %}
+    
+</section>
+
+{% endblock %}
